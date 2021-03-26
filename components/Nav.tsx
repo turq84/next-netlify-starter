@@ -13,9 +13,6 @@ const Nav = () => {
           <Item>
             <Link href="/about">About</Link>
           </Item>
-          <Item>
-            <Link href="/links">Links (Fauna DB)</Link>
-          </Item>
         </Items>
       </Container>
     </Background>

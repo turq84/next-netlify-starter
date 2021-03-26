@@ -1,44 +1,40 @@
+import React, { useEffect, useState } from 'react';
+import LinkList from '../components/LinkList';
+import LinkForm from '../components/LinkForm';
 import Layout from '../components/Layout';
 import styled from '@emotion/styled';
-import { server } from '../config';
-import ArticleList from '../components/ArticleList';
 
-const home = ({ articles }) => {
-  const keywords = 'web development, next js';
-  const title = 'Home';
-  const description = 'This is the home page for my Next js tutorial.';
+const home = () => {
+  const [links, setLinks] = useState([]);
+  const loadLinks = async () => {
+    try {
+      const res = await fetch('/.netlify/functions/getLinks');
+      const links = await res.json();
+      setLinks(links);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    loadLinks();
+  }, []);
+
+  const title = 'Links Query';
+  const keywords = 'links, query, fauma DB, Fauma, Next JS';
+  const description = 'A Fauma DB example using Next JS.';
 
   return (
-    <Layout title={title} description={description} keywords={keywords}>
-      <h1>Welcome to Next!</h1>
-
-      <h3>Articles</h3>
-
-      <ArticleList articles={articles} />
+    <Layout title={title} keywords={keywords} description={description}>
+      <Container>
+        <h1>List of Links</h1>
+        <LinkForm refreshLinks={loadLinks} />
+        <LinkList links={links} refreshLinks={loadLinks} />
+      </Container>
     </Layout>
   );
 };
 
-export const getStaticProps = async () => {
-  const res = await fetch(`${server}/api/articles`);
-  const articles = await res.json();
-
-  return {
-    props: {
-      articles,
-    },
-  };
-};
-
-// export const getStaticProps = async () => {
-//   const res = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=6`)
-//   const articles = await res.json()
-
-//   return {
-//     props: {
-//       articles,
-//     },
-//   }
-// }
-
 export default home;
+
+const Container = styled.div``;
