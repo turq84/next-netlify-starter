@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import Layout from '../components/Layout';
 import LinkForm from '../components/LinkForm';
 
-const addLink = () => {
+const AddLink = () => {
   const [links, setLinks] = useState([]);
 
   const loadLinks = async () => {
@@ -31,4 +31,4 @@ const addLink = () => {
   );
 };
 
-export default addLink;
+export default AddLink;

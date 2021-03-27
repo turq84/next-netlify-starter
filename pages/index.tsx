@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import styled from '@emotion/styled';
 import LinkList from '../components/LinkList';
 import Layout from '../components/Layout';
-import styled from '@emotion/styled';
 import { server } from '../config';
 
-const home = ({ links }) => {
+const Home = ({ links }) => {
   const title = 'Links Query';
   const keywords = 'links, query, fauma DB, Fauma, Next JS';
   const description = 'A Fauma DB example using Next JS.';
@@ -19,7 +19,7 @@ const home = ({ links }) => {
   );
 };
 
-export default home;
+export default Home;
 
 export const getStaticProps = async () => {
   const res = await fetch(`${server}/.netlify/functions/getLinks`);
