@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import LinkList from '../components/LinkList';
-import Layout from '../components/Layout';
 import styled from '@emotion/styled';
+import Layout from '../components/Layout';
+import LinkForm from '../components/LinkForm';
 
-const home = () => {
+const addLink = () => {
   const [links, setLinks] = useState([]);
+
   const loadLinks = async () => {
     try {
-      const res = await fetch('/api/getLinks');
+      const res = await fetch('/.netlify/functions/getLinks');
       const links = await res.json();
       setLinks(links);
     } catch (err) {
@@ -19,20 +20,15 @@ const home = () => {
     loadLinks();
   }, []);
 
-  const title = 'Links Query';
+  const title = 'Add a link';
   const keywords = 'links, query, fauma DB, Fauma, Next JS';
-  const description = 'A Fauma DB example using Next JS.';
+  const description = 'Add a new link to the Fauma DB using Next JS.';
 
   return (
     <Layout title={title} keywords={keywords} description={description}>
-      <Container>
-        <h1>List of Links</h1>
-        <LinkList links={links} refreshLinks={loadLinks} />
-      </Container>
+      <LinkForm refreshLinks={loadLinks} />
     </Layout>
   );
 };
 
-export default home;
-
-const Container = styled.div``;
+export default addLink;

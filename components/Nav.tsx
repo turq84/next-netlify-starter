@@ -13,6 +13,9 @@ const Nav = () => {
           <Item>
             <Link href="/about">About</Link>
           </Item>
+          <Item>
+            <Link href="/add-a-link">Add a Link</Link>
+          </Item>
         </Items>
       </Container>
     </Background>

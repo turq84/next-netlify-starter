@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import Link from 'next/link';
 
 const LinkCard = ({ link, refreshLinks }) => {
   const archiveLink = async () => {
@@ -11,7 +12,7 @@ const LinkCard = ({ link, refreshLinks }) => {
       });
       refreshLinks();
     } catch (error) {
-      console.error('AHHH', error);
+      console.error('Error', error);
     }
   };
 
@@ -24,37 +25,41 @@ const LinkCard = ({ link, refreshLinks }) => {
       });
       refreshLinks();
     } catch (error) {
-      console.error('AHHH', error);
+      console.error('Error', error);
     }
   };
 
   return (
-    <Container>
-      <LinkTitle>{link.name}</LinkTitle>
-      <Section>
-        <Label>Website</Label>
-        <a href={link.url}>{link.url}</a>
-      </Section>
-      <Section>
-        <Label>Description</Label>
-        <p>{link.description}</p>
-      </Section>
+    <Container href="/link/[id]" as={`/link/${link._id}`}>
+      <CardContainer>
+        <LinkTitle>{link.name}</LinkTitle>
+        <Section>
+          <Label>Website</Label>
+          <p>{link.url}</p>
+        </Section>
+        <Section>
+          <Label>Description</Label>
+          <p>{link.description}</p>
+        </Section>
 
-      <ButtonContainer>
-        <Button onClick={archiveLink}>Archive</Button>
-        <Button onClick={deleteLink}>Delete</Button>
-      </ButtonContainer>
+        <ButtonContainer>
+          <Button onClick={archiveLink}>Archive</Button>
+          <Button onClick={deleteLink}>Delete</Button>
+        </ButtonContainer>
+      </CardContainer>
     </Container>
   );
 };
 
 export default LinkCard;
 
-const Container = styled.div`
+const Container = styled(Link)`
   border: 1px solid #e6e6e6;
   border-radius: 8px;
   padding: 15px;
 `;
+
+const CardContainer = styled.div``;
 
 const LinkTitle = styled.h4`
   color: #5b708b;
