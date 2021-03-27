@@ -2,7 +2,11 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Link from 'next/link';
 
-const LinkCard = ({ link, refreshLinks }) => {
+type Props = {
+  link: any;
+};
+
+const LinkCard = ({ link }: Props) => {
   const archiveLink = async () => {
     link.archived = true;
     try {
@@ -10,7 +14,6 @@ const LinkCard = ({ link, refreshLinks }) => {
         method: 'PUT',
         body: JSON.stringify(link),
       });
-      refreshLinks();
     } catch (error) {
       console.error('Error', error);
     }
@@ -23,7 +26,6 @@ const LinkCard = ({ link, refreshLinks }) => {
         method: 'DELETE',
         body: JSON.stringify({ id }),
       });
-      refreshLinks();
     } catch (error) {
       console.error('Error', error);
     }
@@ -59,7 +61,17 @@ const Container = styled(Link)`
   padding: 15px;
 `;
 
-const CardContainer = styled.div``;
+const CardContainer = styled.div`
+  cursor: pointer;
+  padding: 15px 10px;
+  border-radius: 8px;
+  transition: all 0.15s linear 0s;
+
+  &:hover {
+    box-shadow: 0px 5px 15px rgba(2, 38, 64, 0.25);
+    transition: all 0.15s linear 0s;
+  }
+`;
 
 const LinkTitle = styled.h4`
   color: #5b708b;

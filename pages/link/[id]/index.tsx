@@ -11,7 +11,6 @@ const link = ({ link }) => {
   return (
     <Layout title={title} keywords={keywords} description={description}>
       <h1>This is a link template.</h1>
-      {JSON.stringify(link)}
       <h3>{link.name}</h3>
       <p>URL: {link.url}</p>
       <p>Description: {link.description}</p>

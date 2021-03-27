@@ -2,23 +2,9 @@ import React, { useEffect, useState } from 'react';
 import LinkList from '../components/LinkList';
 import Layout from '../components/Layout';
 import styled from '@emotion/styled';
+import { server } from '../config';
 
-const home = () => {
-  const [links, setLinks] = useState([]);
-  const loadLinks = async () => {
-    try {
-      const res = await fetch('/.netlify/functions/getLinks');
-      const links = await res.json();
-      setLinks(links);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  useEffect(() => {
-    loadLinks();
-  }, []);
-
+const home = ({ links }) => {
   const title = 'Links Query';
   const keywords = 'links, query, fauma DB, Fauma, Next JS';
   const description = 'A Fauma DB example using Next JS.';
@@ -27,12 +13,23 @@ const home = () => {
     <Layout title={title} keywords={keywords} description={description}>
       <Container>
         <h1>List of Links</h1>
-        <LinkList links={links} refreshLinks={loadLinks} />
+        <LinkList links={links} />
       </Container>
     </Layout>
   );
 };
 
 export default home;
+
+export const getStaticProps = async () => {
+  const res = await fetch(`${server}/.netlify/functions/getLinks`);
+  const links = await res.json();
+
+  return {
+    props: {
+      links,
+    },
+  };
+};
 
 const Container = styled.div``;
