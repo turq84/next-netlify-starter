@@ -46,6 +46,7 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-unused-vars': 'warn',
+    '@typescript-eslint/no-var-requires': 0,
 
     // Enforce absolute imports to be first
     'import/order': [
@@ -78,7 +79,7 @@ module.exports = {
       'warn',
       {
         singleQuote: true,
-        trailingComma: 'none',
+        trailingComma: 'all',
       },
     ],
   },
