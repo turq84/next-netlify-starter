@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
+import fetchAPI from '../graphql/fetchAPI';
+import { CREATE_LINK } from '../graphql/linkQueries';
 
-const LinkForm = ({ refreshLinks }) => {
+const LinkForm = () => {
   const [name, setName] = useState('');
   const [url, setUrl] = useState('');
   const [description, setDescription] = useState('');
@@ -16,12 +18,8 @@ const LinkForm = ({ refreshLinks }) => {
     e.preventDefault();
     const body = { name, url, description };
     try {
-      const res = await fetch('/.netlify/functions/createLink', {
-        method: 'POST',
-        body: JSON.stringify(body),
-      });
+      await fetchAPI(CREATE_LINK, body);
       resetForm();
-      refreshLinks();
     } catch (error) {
       console.error(error);
     }

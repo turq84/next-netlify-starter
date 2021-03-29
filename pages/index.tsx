@@ -2,12 +2,15 @@ import React from 'react';
 import styled from '@emotion/styled';
 import LinkList from '../components/LinkList';
 import Layout from '../components/Layout';
-import { server } from '../config';
+import fetchAPI from '../graphql/fetchAPI';
+import { GET_LINKS } from '../graphql/linkQueries';
 
-const Home = ({ links }) => {
+const Home = ({ data }) => {
   const title = 'Links Query';
   const keywords = 'links, query, fauma DB, Fauma, Next JS';
   const description = 'A Fauma DB example using Next JS.';
+
+  const links = data.allLinks.data;
 
   return (
     <Layout title={title} keywords={keywords} description={description}>
@@ -22,12 +25,11 @@ const Home = ({ links }) => {
 export default Home;
 
 export const getStaticProps = async () => {
-  const res = await fetch(`${server}/.netlify/functions/getLinks`);
-  const links = await res.json();
+  const data = await fetchAPI(GET_LINKS, null);
 
   return {
     props: {
-      links,
+      data,
     },
   };
 };
