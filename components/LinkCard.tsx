@@ -44,6 +44,7 @@ const LinkCard = ({ link }: Props) => {
         <Label>Description</Label>
         <p>{link.description}</p>
       </Section>
+      <p>Archived? {link.archived ? 'TRUE' : 'FALSE'}</p>
       <Link href="/link/[id]" as={`/link/${link._id}`}>
         Read more
       </Link>
