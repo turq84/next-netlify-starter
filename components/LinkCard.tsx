@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import updateAPI from '../graphql/updateAPI';
@@ -10,8 +10,12 @@ type Props = {
 };
 
 const LinkCard = ({ link }: Props) => {
+  const [isFavorited, setFavorited] = useState(link.archived);
+
   const archiveLink = async () => {
-    link.archived = true;
+    setFavorited(!isFavorited);
+    link.archived = !link.archived;
+
     try {
       await updateAPI(UPDATE_LINK, link);
     } catch (error) {
@@ -44,7 +48,9 @@ const LinkCard = ({ link }: Props) => {
         Read more
       </Link>
       <ButtonContainer>
-        <Button onClick={archiveLink}>Favorite</Button>
+        <Button onClick={archiveLink} active={isFavorited}>
+          {isFavorited ? 'Favorited' : 'Favorite'}
+        </Button>
         <Button onClick={deleteLink}>Delete</Button>
       </ButtonContainer>
     </CardContainer>
@@ -64,7 +70,7 @@ const CardContainer = styled.div`
   }
 
   a {
-    color: #ff3366;
+    color: #000;
     font-weight: 600;
     text-decoration: none;
   }
@@ -74,10 +80,12 @@ const LinkTitle = styled.h4`
   color: #5b708b;
 `;
 
-const Button = styled.button`
+const Button = styled.button<{ active?: boolean }>`
   border-radius: 8px;
   border: none;
-  background-color: #eee;
+  background-color: ${(props) =>
+    props.active ? 'rgba(255, 51, 102, 0.2)' : '#eee'};
+  color: ${(props) => (props.active ? 'rgba(255, 51, 102, 1)' : '#000')};
   padding: 10px 15px;
   margin-right: 15px;
   font-weight: 600;
