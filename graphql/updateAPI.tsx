@@ -1,6 +1,5 @@
 const API_URL = 'https://graphql.fauna.com/graphql';
-// const API_TOKEN = process.env.FAUNA_SECRET_KEY;
-const API_TOKEN = '';
+const API_TOKEN = process.env.FAUNA_SECRET_KEY;
 
 const updateAPI = async (query, data) => {
   const { name, url, description, _id: id, archived } = data;
