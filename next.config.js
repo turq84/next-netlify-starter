@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
   target: 'serverless',
   webpack: function(config) {
@@ -8,6 +10,7 @@ module.exports = {
     return config;
   },
 
+  // SECRETS
   env: {
     FAUNA_SECRET_KEY: process.env.FAUNA_SECRET_KEY,
   },
