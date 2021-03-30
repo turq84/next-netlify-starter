@@ -6,17 +6,13 @@ const Nav = () => {
   return (
     <Background>
       <Container>
-        <Items>
-          <Item>
-            <Link href="/">Home</Link>
-          </Item>
-          <Item>
-            <Link href="/about">About</Link>
-          </Item>
-          <Item>
-            <Link href="/add-a-link">Add a Link</Link>
-          </Item>
-        </Items>
+        <NavStyle>
+          <LinkContainer>
+            <NavLink href="/">Home</NavLink>
+            <NavLink href="/about">About</NavLink>
+            <NavLink href="/add-a-link">Add a Link</NavLink>
+          </LinkContainer>
+        </NavStyle>
       </Container>
     </Background>
   );
@@ -36,21 +32,32 @@ const Container = styled.div`
   margin: auto;
 `;
 
-const Items = styled.ul`
-  display: flex;
-  flex-direction: row;
-  margin: 0px;
-  padding-left: 0px;
+const LinkContainer = styled.div``;
+
+const NavLink = styled(Link)`
+  text-decoration: none;
+  margin-right: 30px;
 `;
 
-const Item = styled.li`
-  list-style: none;
-  margin-right: 30px;
-  font-size: 18px;
-  transition: all 0.25s linear 0s;
+const NavStyle = styled.nav`
+  display: flex;
+  justify-content: space-between;
 
-  &:hover {
-    color: #ff3366;
-    transition: all 0.25s linear 0s;
+  a {
+    font-size: 18px;
+    transition: all 0.2s linear 0s;
+    padding: 1rem;
+    text-decoration: none;
+    color: #000;
+
+    &:hover {
+      color: #ff3366;
+      transition: all 0.2s linear 0s;
+    }
+
+    &[aria-current] {
+      // background-color: #faf9f4;
+      // color: #353637;
+    }
   }
 `;

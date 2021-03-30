@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Link from 'next/link';
+import updateAPI from '../graphql/updateAPI';
+import deleteAPI from '../graphql/deleteAPI';
+import { UPDATE_LINK, DELETE_LINK } from '../graphql/linkQueries';
 
 type Props = {
   link: any;
@@ -10,10 +13,7 @@ const LinkCard = ({ link }: Props) => {
   const archiveLink = async () => {
     link.archived = true;
     try {
-      await fetch('/.netlify/functions/updateLink', {
-        method: 'PUT',
-        body: JSON.stringify(link),
-      });
+      await updateAPI(UPDATE_LINK, link);
     } catch (error) {
       console.error('Error', error);
     }
@@ -22,47 +22,38 @@ const LinkCard = ({ link }: Props) => {
   const deleteLink = async () => {
     const id = link._id;
     try {
-      await fetch('/.netlify/functions/deleteLink', {
-        method: 'DELETE',
-        body: JSON.stringify({ id }),
-      });
+      const data = JSON.stringify({ id });
+      await deleteAPI(DELETE_LINK, data);
     } catch (error) {
       console.error('Error', error);
     }
   };
 
   return (
-    <Container href="/link/[id]" as={`/link/${link._id}`}>
-      <CardContainer>
-        <LinkTitle>{link.name}</LinkTitle>
-        <Section>
-          <Label>Website</Label>
-          <p>{link.url}</p>
-        </Section>
-        <Section>
-          <Label>Description</Label>
-          <p>{link.description}</p>
-        </Section>
-
-        <ButtonContainer>
-          <Button onClick={archiveLink}>Archive</Button>
-          <Button onClick={deleteLink}>Delete</Button>
-        </ButtonContainer>
-      </CardContainer>
-    </Container>
+    <CardContainer>
+      <LinkTitle>{link.name}</LinkTitle>
+      <Section>
+        <Label>Website</Label>
+        <p>{link.url}</p>
+      </Section>
+      <Section>
+        <Label>Description</Label>
+        <p>{link.description}</p>
+      </Section>
+      <Link href="/link/[id]" as={`/link/${link._id}`}>
+        Read more
+      </Link>
+      <ButtonContainer>
+        <Button onClick={archiveLink}>Favorite</Button>
+        <Button onClick={deleteLink}>Delete</Button>
+      </ButtonContainer>
+    </CardContainer>
   );
 };
 
 export default LinkCard;
 
-const Container = styled(Link)`
-  border: 1px solid #e6e6e6;
-  border-radius: 8px;
-  padding: 15px;
-`;
-
 const CardContainer = styled.div`
-  cursor: pointer;
   padding: 15px 10px;
   border-radius: 8px;
   transition: all 0.15s linear 0s;
@@ -70,6 +61,12 @@ const CardContainer = styled.div`
   &:hover {
     box-shadow: 0px 5px 15px rgba(2, 38, 64, 0.25);
     transition: all 0.15s linear 0s;
+  }
+
+  a {
+    color: #ff3366;
+    font-weight: 600;
+    text-decoration: none;
   }
 `;
 

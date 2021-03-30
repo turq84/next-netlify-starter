@@ -12,6 +12,8 @@ const Home = ({ data }) => {
 
   const links = data.allLinks.data;
 
+  // console.log('data: ', data);
+
   return (
     <Layout title={title} keywords={keywords} description={description}>
       <Container>
