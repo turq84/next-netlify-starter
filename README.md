@@ -44,3 +44,40 @@ Here's a great resource to use: https://seanconnolly.dev/nextjs-and-fauna-graphq
 ### Environment Variables
 
 https://nextjs.org/docs/api-reference/next.config.js/environment-variables
+
+### Blog
+
+Blog content is stored in the `Blog` folder, in the root directory.
+
+#### Files to add
+
+1.  `components/postList`: https://github.com/cassidoo/next-netlify-blog-starter/blob/master/components/PostList.js
+2.  `pages/blog/[slug].js`: https://github.com/cassidoo/next-netlify-blog-starter/blob/master/pages/post/%5Bpostname%5D.js (change postname to slug)
+3.  `siteconfig.json`: https://github.com/cassidoo/next-netlify-blog-starter/blob/master/siteconfig.json
+4.  `utils/blog/getPosts.js`: https://github.com/cassidoo/next-netlify-blog-starter/blob/master/utils/getPosts.js
+5.  `utils/blog/getSlugs.js`: https://github.com/cassidoo/next-netlify-blog-starter/blob/master/utils/getSlugs.js
+
+#### Packages
+
+1.  `gray-matter`
+2.  `react-markdown`
+3.  `raw-loader`
+
+#### Next config file
+
+The next.config.js file will need to be updated to include the following: https://github.com/cassidoo/next-netlify-blog-starter/blob/1758e4c4201713fbe634e103781a6915e8fbb0b6/next.config.js
+
+#### Hero images
+
+You may include an optional hero image in your posts. Put the images in `public/static/`, and then include in your blog .md file like so:
+
+```
+---
+title: 'Post title'
+author: 'Post author'
+date: '2020-04-27'
+hero_image: ../static/example.jpg
+---
+```
+
+See `the-city-of-hipsters.md` for an example of this.

@@ -1,5 +1,3 @@
-import { graphql } from 'graphql';
-
 export const linksFragment = `
   fragment linksFragment on Link {    
     name

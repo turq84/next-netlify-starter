@@ -27,7 +27,7 @@ const LinkForm = () => {
 
   return (
     <Container>
-      <h3>Add a new link</h3>
+      <Title>Add a new link</Title>
       <form onSubmit={handleSubmit}>
         <InputContainer>
           <Input
@@ -64,6 +64,10 @@ export default LinkForm;
 const Container = styled.div`
   width: 550px;
   margin: auto;
+`;
+
+const Title = styled.h1`
+  text-align: center;
 `;
 
 const Button = styled.button`

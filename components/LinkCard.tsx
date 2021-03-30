@@ -63,6 +63,7 @@ const CardContainer = styled.div`
   padding: 15px 10px;
   border-radius: 8px;
   transition: all 0.15s linear 0s;
+  width: 35rem;
 
   &:hover {
     box-shadow: 0px 5px 15px rgba(2, 38, 64, 0.25);
