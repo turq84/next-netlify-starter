@@ -16,7 +16,7 @@ const Home = ({ data }) => {
     <Layout title={title} keywords={keywords} description={description}>
       <Container>
         <h1>List of Links</h1>
-
+        Hash: {process.env.FAUNA_SECRET_KEY}
         <h3>Links</h3>
         {linkData &&
           linkData.map((link) => <LinkCard key={link._id} link={link} />)}
