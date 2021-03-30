@@ -12,7 +12,6 @@ module.exports = {
 
   // SECRETS
   env: {
-    FAUNA_SECRET_KEY: 'fnAEFKhC5QACBeeP9BNF37bFA--jnkojqm7H87y5',
-    // FAUNA_SECRET_KEY: process.env.FAUNA_SECRET_KEY,
+    FAUNA_SECRET_KEY: process.env.FAUNA_SECRET_KEY,
   },
 };
