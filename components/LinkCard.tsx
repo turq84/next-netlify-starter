@@ -1,40 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import updateAPI from '../graphql/updateAPI';
 import deleteAPI from '../graphql/deleteAPI';
-import { UPDATE_LINK, DELETE_LINK } from '../graphql/linkQueries';
+import fetchAPI from '../graphql/fetchAPI';
+import { UPDATE_LINK, DELETE_LINK, GET_ONE_LINK } from '../graphql/linkQueries';
 
 type Props = {
   link: any;
 };
 
 const LinkCard = ({ link }: Props) => {
-  const [isFavorited, setFavorited] = useState(link.archived);
+  const [isFavorited, setFavorited] = useState(false);
+  const [isDeleted, setDeleted] = useState(false);
+
+  const loadLikeData = async () => {
+    const id = { id: link._id };
+    const data = await fetchAPI(GET_ONE_LINK, id);
+    const liked = data.findLinkByID.archived;
+
+    setFavorited(liked);
+  };
+
+  useEffect(() => {
+    loadLikeData();
+  });
 
   const archiveLink = async () => {
-    setFavorited(!isFavorited);
-    link.archived = !link.archived;
+    link.archived = !isFavorited;
 
     try {
       await updateAPI(UPDATE_LINK, link);
+      loadLikeData();
     } catch (error) {
       console.error('Error', error);
     }
   };
 
   const deleteLink = async () => {
-    const id = link._id;
     try {
-      const data = JSON.stringify({ id });
-      await deleteAPI(DELETE_LINK, data);
+      const res = await deleteAPI(DELETE_LINK, link);
+
+      // IF DELETED IN THE DATABASE, REMOVE THE LINK CARD FROM THE LIST
+      if (res) {
+        setDeleted(true);
+      }
     } catch (error) {
       console.error('Error', error);
     }
   };
 
   return (
-    <CardContainer>
+    <CardContainer deleted={isDeleted}>
       <LinkTitle>{link.name}</LinkTitle>
       <Section>
         <Label>Website</Label>
@@ -44,7 +61,6 @@ const LinkCard = ({ link }: Props) => {
         <Label>Description</Label>
         <p>{link.description}</p>
       </Section>
-      <p>Archived? {link.archived ? 'TRUE' : 'FALSE'}</p>
       <Link href="/link/[id]" as={`/link/${link._id}`}>
         Read more
       </Link>
@@ -60,11 +76,12 @@ const LinkCard = ({ link }: Props) => {
 
 export default LinkCard;
 
-const CardContainer = styled.div`
+const CardContainer = styled.div<{ deleted?: boolean }>`
   padding: 15px 10px;
   border-radius: 8px;
   transition: all 0.15s linear 0s;
   width: 35rem;
+  display: ${(props) => (props.deleted ? 'none' : 'block')};
 
   &:hover {
     box-shadow: 0px 5px 15px rgba(2, 38, 64, 0.25);

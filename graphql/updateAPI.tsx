@@ -23,7 +23,6 @@ const updateAPI = async (query, data) => {
     throw new Error('Failed to fetch API');
   }
 
-  console.log('JSON DATA: ', json.data);
   return json.data;
 };
 

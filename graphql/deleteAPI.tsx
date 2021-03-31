@@ -2,7 +2,8 @@ const API_URL = 'https://graphql.fauna.com/graphql';
 const API_TOKEN = process.env.FAUNA_SECRET_KEY;
 
 const deleteAPI = async (query, data) => {
-  const id = JSON.parse(data);
+  const { _id: id } = data;
+  const variables = { id };
 
   const res = await fetch(API_URL, {
     method: 'POST',
@@ -12,7 +13,7 @@ const deleteAPI = async (query, data) => {
     },
     body: JSON.stringify({
       query,
-      id,
+      variables,
     }),
   });
 
@@ -21,6 +22,7 @@ const deleteAPI = async (query, data) => {
     console.error(json.errors);
     throw new Error('Failed to fetch API');
   }
+
   return json.data;
 };
 
