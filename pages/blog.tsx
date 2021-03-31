@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from '@emotion/styled';
 import Layout from '../components/Layout';
 import BlogList from '../components/BlogList';
 import getPosts from '../utils/blog/getPosts';
@@ -7,7 +8,7 @@ const Index = ({ blogs, title, description, ...props }) => {
   return (
     <>
       <Layout title={title} description={description} keywords="">
-        <h1 className="title">Welcome to this demo blog!</h1>
+        <Title>Welcome to this demo blog!</Title>
 
         <p className="description">
           This is a simple blog built with Next, easily deployable on{' '}
@@ -25,12 +26,6 @@ const Index = ({ blogs, title, description, ...props }) => {
           <a href="https://url.netlify.com/ByVW0bCF8">here</a>.
         </p>
       </Layout>
-      <style jsx>{`
-        .title {
-          margin: 1rem auto;
-          font-size: 3rem;
-        }
-      `}</style>
     </>
   );
 };
@@ -53,3 +48,8 @@ export async function getStaticProps() {
     },
   };
 }
+
+const Title = styled.h1`
+  margin: 1rem auto;
+  font-size: 3rem;
+`;

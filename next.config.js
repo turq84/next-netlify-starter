@@ -10,8 +10,20 @@ module.exports = {
     return config;
   },
 
-  // SECRETS
   env: {
+    // FAUNA DB
     FAUNA_SECRET_KEY: process.env.FAUNA_SECRET_KEY,
+    DATABASE_URL: process.env.DATABASE_URL,
+
+    // TWITTER API
+    TWITTER_ID: process.env.TWITTER_ID,
+    TWITTER_API_KEY: process.env.TWITTER_API_KEY,
+    TWITTER_SECRET: process.env.TWITTER_SECRET,
+
+    // AUTH0 API
+    AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,
+    AUTH0_CLIENT_SECRET: process.env.AUTH0_CLIENT_SECRET,
+    AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
+    COOKIE_SECRET: process.env.COOKIE_SECRET,
   },
 };
