@@ -81,3 +81,11 @@ hero_image: ../static/example.jpg
 ```
 
 See `the-city-of-hipsters.md` for an example of this.
+
+### Authentication with FaunaDB
+
+The authentication for this project was done using the following tutorial: https://medium.com/technest/implement-faunadb-authentication-in-next-js-and-graphql-app-29aaca4d8d96
+
+Here is the source code for the project mentioned in the article: https://github.com/kjmczk/next-fauna-auth
+
+Highly Recommended!

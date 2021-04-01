@@ -12,6 +12,9 @@ const Nav = () => {
             <NavLink href="/about">About</NavLink>
             <NavLink href="/add-a-link">Add a Link</NavLink>
             <NavLink href="/blog">Blog</NavLink>
+            <NavLink href="/signup">Sign Up</NavLink>
+            <NavLink href="/login">Login</NavLink>
+            <NavLink href="/new">New Todo</NavLink>
           </LinkContainer>
         </NavStyle>
       </Container>

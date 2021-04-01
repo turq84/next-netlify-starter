@@ -25,5 +25,9 @@ module.exports = {
     AUTH0_CLIENT_SECRET: process.env.AUTH0_CLIENT_SECRET,
     AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
     COOKIE_SECRET: process.env.COOKIE_SECRET,
+
+    // Auth Example Tutorial
+    NEXT_PUBLIC_FAUNA_GUEST_SECRET: process.env.NEXT_PUBLIC_FAUNA_GUEST_SECRET,
+    FAUNA_GUEST_SECRET: process.env.FAUNA_GUEST_SECRET,
   },
 };

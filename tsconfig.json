@@ -26,7 +26,11 @@
     "functions/getOneLink.js", 
     "functions/utils/sendQuery.js", 
     "functions/utils/formattedResponse.js", 
-    "functions/utils/linkQueries.js"
+    "functions/utils/linkQueries.js",
+    "pages/api/login.js",
+    "pages/api/logout.js",
+    "pages/api/signup.js",
+    "pages/api/user.js",
   ],
   "exclude": [
     "node_modules"

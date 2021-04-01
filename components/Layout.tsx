@@ -1,7 +1,8 @@
 import React from 'react';
+import styled from '@emotion/styled';
 import Meta from './Meta';
 import Nav from './Nav';
-import styled from '@emotion/styled';
+import HeaderTutorial from './HeaderTutorial';
 
 type Props = {
   title: string;
@@ -17,6 +18,7 @@ const Layout = (props: Props) => {
     <div>
       <Meta title={title} keywords={keywords} description={description} />
       <Nav />
+      <HeaderTutorial />
       <Content>{children}</Content>
     </div>
   );

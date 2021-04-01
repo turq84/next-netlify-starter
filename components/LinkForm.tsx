@@ -29,7 +29,7 @@ const LinkForm = () => {
     <Container>
       <Title>Add a new link</Title>
       <form onSubmit={handleSubmit}>
-        <InputContainer>
+        {/* <InputContainer>
           <Input
             type="text"
             name="name"
@@ -53,7 +53,7 @@ const LinkForm = () => {
             onChange={(e) => setDescription(e.target.value)}
           />
           <Button type="submit">Submit</Button>
-        </TextAreaContainer>
+        </TextAreaContainer> */}
       </form>
     </Container>
   );

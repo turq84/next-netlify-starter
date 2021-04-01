@@ -16,7 +16,7 @@ enum Role {
 }
 
 type User {
-  email: String!
+  email: String! @unique
   password: String!
   passwordReset: String
   authenticated: Boolean!

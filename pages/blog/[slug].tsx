@@ -33,8 +33,8 @@ const BlogPost = ({ frontmatter, markdownBody }) => {
 
 export default BlogPost;
 
-export async function getStaticProps({ ...ctx }) {
-  const { slug } = ctx.params;
+export async function getStaticProps({ ...context }) {
+  const { slug } = context.params;
 
   const content = await import(`../../blog/${slug}.md`);
   const data = matter(content.default);
