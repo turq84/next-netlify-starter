@@ -1,10 +1,30 @@
+# Good graphql resource: https://graphql.org/learn/schema/
+
 type Link {
   url: String!
   name: String!
   description: String!
   archived: Boolean
+  userId: String!
+}
+
+enum Role {
+  basic
+  company
+  admin
+  superAdmin
+}
+
+type User {
+  email: String!
+  password: String!
+  passwordReset: String
+  authenticated: Boolean!
+  role: [Role]!
+  notes: String
 }
 
 type Query {
   allLinks: [Link!]!
+  allUsers: [User!]!
 }
